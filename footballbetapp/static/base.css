@@ -1,0 +1,11 @@
+body {
+    width: 80%;
+    /* margin: 1rem auto auto auto; */
+    background-color: blanchedalmond;
+    margin: auto;
+}
+
+.content {
+    background-color: aquamarine;
+    padding: 1rem 10rem 1rem 10rem;
+}

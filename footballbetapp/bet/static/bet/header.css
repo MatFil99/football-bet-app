@@ -1,0 +1,28 @@
+
+.menu {
+    display: inline-block;
+    width: 100%;
+    background-color: blueviolet;
+    /* height: 3rem;
+    padding: 1rem; */
+    margin: 0;
+    padding: 0;
+    position: sticky;
+    top: 0;
+}
+
+.menu a {
+    display: block;
+    float: left;
+    background-color: brown;
+    padding: 1rem 2.5rem 1rem 2.5rem;
+}
+
+#a-login,#a-logout{
+    float: right;
+    background-color: rgb(255, 248, 188);
+}
+
+/* padding: 1rem; */
+/* display: inline-block; */
+

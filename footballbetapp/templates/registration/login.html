@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Login
+{% endblock page_title %}
+
+{% block navigation %}
+    {% include "bet/includes/header.html" %}
+{% endblock navigation %}
+
+{% block content %}
+    Login page
+    <h2>Log In</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit">Log In</button>
+    </form>
+
+
+    <!-- <form action="">
+        <label for="first">
+            Username:
+        </label>
+        <input type="text" id="first" name="first" 
+            placeholder="Enter your Username" required>
+
+        <label for="password">
+            Password:
+        </label>
+        <input type="password" id="password" name="password" 
+            placeholder="Enter your Password" required>
+
+        <div class="wrap">
+            <button type="submit">
+                Submit
+            </button>
+        </div>
+    </form>
+    
+    <p>Not registered?
+        <a href="#" style="text-decoration: none;">
+            Create an account
+        </a>
+    </p> -->
+{% endblock content %}
