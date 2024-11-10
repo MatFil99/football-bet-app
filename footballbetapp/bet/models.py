@@ -1,7 +1,32 @@
 from typing import Any
 from django.db import models
-from django.contrib.auth.models import AbstractUser, AbstractBaseUser
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 
+
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, password=None, **kwargs):
+        """
+        """
+        email, first_name, last_name = "", "", ""
+        if "email" in kwargs:
+            email = kwargs["email"]
+        if "first_name" in kwargs:
+            first_name = kwargs["first_name"]
+        if "last_name" in kwargs:
+            last_name = kwargs["last_name"]
+
+        if not password:
+            raise ValueError("Cannot create User without password")
+        user = self.model(
+            username=username,
+            email=email,
+            first_name=first_name,
+            last_name=last_name
+        )
+        user.set_password(password)
+        user.save()
+        return user
+    
 
 # Create your models here.
 class FootballTeam(models.Model):
@@ -36,11 +61,18 @@ class Match(models.Model):
 
 
 class User(AbstractUser):
-    # match_predictions = 
 
+    objects = CustomUserManager()
 
     class Meta:
         db_table = 'users'
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        # if "password" not in kwargs or kwargs["password"] in [None, ""]:
+        #     raise Exception("Cannot create user without password")
+        super().__init__(*args, **kwargs)
+
+
 
 
 class MatchPrediction(models.Model):
