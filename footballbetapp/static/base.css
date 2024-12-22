@@ -1,11 +1,11 @@
 body {
     width: 80%;
     /* margin: 1rem auto auto auto; */
-    background-color: blanchedalmond;
+    background-color: rgb(235, 235, 235);
     margin: auto;
 }
 
 .content {
-    background-color: aquamarine;
+    background-color: rgb(221, 214, 214);
     padding: 1rem 10rem 1rem 10rem;
 }

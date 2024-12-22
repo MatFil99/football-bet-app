@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block page_title %}
 Teams
 {% endblock page_title %}
@@ -8,17 +10,52 @@ Teams
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+    
+
 {% block content %}
-    Teams page
-    
-    <ul>
-    {% for team in object_list %}
-        <li>{{ team.name }} {{ team.football_team_id }}</li>
-    {% empty %}
+    <form action="">
+        <label for="league">Choose a league:</label>
+        <select name="league" id="league">
+        <option value="premier-league">premier-league</option>
+        <option value="serie-a">serie-a</option>
+        <option value="laliga">laliga</option>
+        <option value="bundesliga">bundesliga</option>
+        </select>
+        <br><br>
+        <select name="season" id="season">
+            <option value="2024/2025">2024/2025</option>
+            <option value="2023/2024">2023/2024</option>
+            <option value="2022/2023">2022/2023</option>
+            <option value="2021/2022">2021/2022</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>    
 
-    {% endfor %}
+    <table id="standings">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Founded</th>
+            <!-- <th>Website</th> -->
+        </tr>
+        {% for team in object_list %}
+        <!-- <li>{{ team.name }} {{ team.football_team_id }}</li> -->
+        <tr>
+            <td>{{ team.football_team_id }}</td>
+            <td><a href="{{ team.website }}">{{ team.name }}</a></td>
+            <td>{{ team.founded }}</td>
+            <!-- <td>{{ team.website }}</td> -->
+        </tr>
+        {% empty %}
+            <p>No Football Teams</p>
+        {% endfor %}
 
-    </ul>
-    
+        
+    </table>
         
 {% endblock content %}

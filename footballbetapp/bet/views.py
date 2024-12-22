@@ -10,7 +10,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.shortcuts import redirect
 
 
-from .models import FootballTeam, MatchPrediction, User
+from .models import FootballTeam, MatchPrediction, User, Match
 from .forms import CustomUserCreationForm
 
 
@@ -40,12 +40,14 @@ class AboutView(TemplateView):
 
 
 
-class MatchesView(TemplateView):
+class MatchesView(ListView):
+    queryset = Match.objects.all() #.order_by("date")
 
     template_name = "bet/matches.html"
 
 class TeamsView(ListView):
-    model = FootballTeam
+    # model = FootballTeam
+    queryset = FootballTeam.objects.all().order_by("name")
     template_name = "bet/teams.html"
 
 class MatchView(TemplateView):

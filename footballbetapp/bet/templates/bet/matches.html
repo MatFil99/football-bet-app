@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block page_title %}
 Matches
@@ -8,6 +9,29 @@ Matches
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+
 {% block content %}
-    Matches page
+
+    <table>
+        <tr>
+            <th>Matchday</th>
+            <th>Home team</th>
+            <th>Score</th>
+            <th>Away team</th>
+        </tr>
+        {% for match in object_list %}
+            <tr>
+                <td>{{ match.matchday }}</td>
+                <td>{{ match.home_team.name }}</td>
+                <td>{{ match.home_score }} : {{ match.away_score }}</td>
+                <td>{{ match.away_team.name }}</td>
+            </tr>
+        {% empty %}
+            No Football Matches!
+        {% endfor %}
+    </table>
+
 {% endblock content %}

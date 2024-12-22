@@ -31,7 +31,13 @@ class CustomUserManager(BaseUserManager):
 # Create your models here.
 class FootballTeam(models.Model):
     football_team_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=150, null=False, default=None)
+    name = models.CharField(max_length=50, null=False, default=None)
+    fullname = models.CharField(max_length=150, null=True, default=None)
+    address = models.CharField(max_length=150, null=True, default=None)
+    founded = models.DateField(null=True, default=None)
+    website = models.CharField(max_length=50, null=True, default=None)
+    league = models.CharField(max_length=25, null=True, default=None)
+    
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -52,9 +58,9 @@ class Match(models.Model):
     # ?
     matchday = models.IntegerField()
     date = models.DateTimeField(null=True)
-    season = models.CharField(max_length=9)
-    home_score = models.IntegerField()
-    away_score = models.IntegerField()
+    season = models.CharField(max_length=9, null=True)
+    home_score = models.IntegerField(null=True)
+    away_score = models.IntegerField(null=True)
 
     class Meta:
         db_table = 'matches'
