@@ -12,6 +12,7 @@
         <a href="{% url "matches" %}">Matches</a>
         <a href="{% url "ranking" %}">Ranking</a>
         <a href="{% url "profile" %}">Profile</a>
+        <a href="{% url "contact" %}">Contact</a>
         <a href="{% url "about" %}">About</a>
 
         <form action="{% url "logout" %}" method="post">
@@ -24,6 +25,7 @@
         <a href="{% url "teams" %}">Teams</a>
         <a href="{% url "matches" %}">Matches</a>
         <a href="{% url "about" %}">About</a>
+        <a href="{% url "contact" %}">Contact</a>
         <a id="a-login" href="{% url "login" %}">Login</a>
         {% endif %}
     </nav>

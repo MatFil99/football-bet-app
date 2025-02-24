@@ -15,19 +15,77 @@ Matches
 
 {% block content %}
 
+    <div class="form-div">
+        <form action="{% url 'matches' %}" class="matches-form" method="post">
+            {% csrf_token %}
+            <div class="label-div">
+                <label class="matches-form">Matches:</label>
+            </div>
+            <div class="select-div">
+                <select name="league" id="league" class="matches-form">
+                    {% for league in league_list %}
+                        <option value="{{ league }}"{% if league == selected_league %} selected {% endif %}>
+                            {{ league }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-div">
+                <select name="season" id="season" class="matches-form">
+                    {% for season in season_list %}
+                        <option value="{{ season }}" {% if season == selected_season %} selected {% endif %}>
+                            {{ season }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-div">
+                <select name="matchday" id="matchday" class="matches-form">
+                        {% for matchday in matchday_list %}
+                            <option value="{{ matchday }}" {% if matchday == selected_matchday %} selected {% endif %}>
+                                {{ matchday }}
+                            </option>
+                        {% endfor %} 
+                </select>
+            </div>
+            <div class="select-div">
+                <input type="submit" value="Submit" class="matches-form">
+            </div>
+        </form>
+    </div>  
     <table>
         <tr>
             <th>Matchday</th>
+            <th>Date</th>
             <th>Home team</th>
             <th>Score</th>
             <th>Away team</th>
         </tr>
         {% for match in object_list %}
             <tr>
-                <td>{{ match.matchday }}</td>
-                <td>{{ match.home_team.name }}</td>
-                <td>{{ match.home_score }} : {{ match.away_score }}</td>
-                <td>{{ match.away_team.name }}</td>
+                <td>
+                    <a href="{% url 'match' match_id=match.match_id %}">
+                    {{ match.matchday }}</td>
+                    </a>
+                <td>
+                    <a href="{% url 'match' match_id=match.match_id %}">
+                        {{ match.date|date:"d.m.Y H:i" }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'match' match_id=match.match_id %}">
+                    {{ match.home_team.name }}</td>
+                    </a>
+                <td>
+                    <a href="{% url 'match' match_id=match.match_id %}">
+                    {{ match.home_score|default_if_none:"-" }} : {{ match.away_score|default_if_none:"-" }}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'match' match_id=match.match_id %}">
+                    {{ match.away_team.name }}
+                    </a>
+                </td>
             </tr>
         {% empty %}
             No Football Matches!

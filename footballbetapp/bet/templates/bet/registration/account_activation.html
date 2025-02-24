@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 
 {% block page_title %}
-Login
+Acoount activation
 {% endblock page_title %}
 
 {% block navigation %}
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
-    
-
 {% block content %}
-    Password reset confirm
-    
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Change password</button>
-    </form>
+
+
+{% if activation_success == True %}
+    Account activated successfully.
+{% else %}
+    Invalid activation code
+{% endif %}
+
 
 {% endblock content %}

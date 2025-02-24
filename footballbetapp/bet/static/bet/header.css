@@ -19,6 +19,7 @@
     font-size: large;
     background-color: rgb(121, 0, 0);
     padding: 1rem 2.5rem 1rem 2.5rem;
+    text-decoration: none;
 }
 
 #a-login,#a-logout{

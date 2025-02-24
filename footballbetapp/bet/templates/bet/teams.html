@@ -17,39 +17,61 @@ Teams
     
 
 {% block content %}
-    <form action="">
-        <label for="league">Choose a league:</label>
-        <select name="league" id="league">
-        <option value="premier-league">premier-league</option>
-        <option value="serie-a">serie-a</option>
-        <option value="laliga">laliga</option>
-        <option value="bundesliga">bundesliga</option>
-        </select>
-        <br><br>
-        <select name="season" id="season">
-            <option value="2024/2025">2024/2025</option>
-            <option value="2023/2024">2023/2024</option>
-            <option value="2022/2023">2022/2023</option>
-            <option value="2021/2022">2021/2022</option>
-        </select>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>    
+
+    <div class="form-div">
+        <form action="{% url 'teams' %}" class="standigs-form" method="post">
+            {% csrf_token %}
+            <div class="label-div">
+                <label for="league" class="standigs-form">Standings:</label>
+            </div>
+            <div class="select-div">
+                <select name="league" id="league" class="standigs-form">
+                    {% for league in league_list %}
+                    <option value="{{ league }}" {% if league == selected_league %} selected {% endif %}>{{ league }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-div">
+                <select name="season" id="season" class="standigs-form">
+                    {% for season in season_list %}
+                    <option value="{{ season }}" {% if season == selected_season %} selected {% endif %}>{{ season }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-div">
+                <input type="submit" value="Submit" class="standigs-form">
+            </div>
+        </form>
+    </div>    
 
     <table id="standings">
         <tr>
-            <th>Id</th>
+            <th>Rank</th>
             <th>Name</th>
-            <th>Founded</th>
+            <th>MP</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th class="points">Pts</th>
+            <!-- <th>Founded</th> -->
             <!-- <th>Website</th> -->
         </tr>
         {% for team in object_list %}
         <!-- <li>{{ team.name }} {{ team.football_team_id }}</li> -->
         <tr>
-            <td>{{ team.football_team_id }}</td>
+            <td>{{ forloop.counter }}</td>
             <td><a href="{{ team.website }}">{{ team.name }}</a></td>
-            <td>{{ team.founded }}</td>
-            <!-- <td>{{ team.website }}</td> -->
+            <td>{{ team.total_matches }}</td>
+            <td>{{ team.total_win }}</td>
+            <td>{{ team.total_draw }}</td>
+            <td>{{ team.total_lost }}</td>
+            <td>{{ team.total_scored_goals }}</td>
+            <td>{{ team.total_lost_goals }}</td>
+            <td>{{ team.goals_balance }}</td>
+            <td class="points">{{ team.total_points }}</td>
         </tr>
         {% empty %}
             <p>No Football Teams</p>

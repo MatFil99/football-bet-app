@@ -1,22 +1,21 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block page_title %}
-Login
+Calculate Predictions' Points
 {% endblock page_title %}
 
 {% block navigation %}
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
-    
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
 
 {% block content %}
-    Password reset confirm
     
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Change password</button>
-    </form>
+    Calculate Predictions' Points
 
 {% endblock content %}
