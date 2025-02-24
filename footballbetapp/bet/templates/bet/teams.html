@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block page_title %}
 Teams
 {% endblock page_title %}
@@ -8,17 +10,74 @@ Teams
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+    
+
 {% block content %}
-    Teams page
-    
-    <ul>
-    {% for team in object_list %}
-        <li>{{ team.name }} {{ team.football_team_id }}</li>
-    {% empty %}
 
-    {% endfor %}
+    <div class="form-div">
+        <form action="{% url 'teams' %}" class="standigs-form" method="post">
+            {% csrf_token %}
+            <div class="label-div">
+                <label for="league" class="standigs-form">Standings:</label>
+            </div>
+            <div class="select-div">
+                <select name="league" id="league" class="standigs-form">
+                    {% for league in league_list %}
+                    <option value="{{ league }}" {% if league == selected_league %} selected {% endif %}>{{ league }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-div">
+                <select name="season" id="season" class="standigs-form">
+                    {% for season in season_list %}
+                    <option value="{{ season }}" {% if season == selected_season %} selected {% endif %}>{{ season }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select-div">
+                <input type="submit" value="Submit" class="standigs-form">
+            </div>
+        </form>
+    </div>    
 
-    </ul>
-    
+    <table id="standings">
+        <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>MP</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GF</th>
+            <th>GA</th>
+            <th>GD</th>
+            <th class="points">Pts</th>
+            <!-- <th>Founded</th> -->
+            <!-- <th>Website</th> -->
+        </tr>
+        {% for team in object_list %}
+        <!-- <li>{{ team.name }} {{ team.football_team_id }}</li> -->
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><a href="{{ team.website }}">{{ team.name }}</a></td>
+            <td>{{ team.total_matches }}</td>
+            <td>{{ team.total_win }}</td>
+            <td>{{ team.total_draw }}</td>
+            <td>{{ team.total_lost }}</td>
+            <td>{{ team.total_scored_goals }}</td>
+            <td>{{ team.total_lost_goals }}</td>
+            <td>{{ team.goals_balance }}</td>
+            <td class="points">{{ team.total_points }}</td>
+        </tr>
+        {% empty %}
+            <p>No Football Teams</p>
+        {% endfor %}
+
+        
+    </table>
         
 {% endblock content %}

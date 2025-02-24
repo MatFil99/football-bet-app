@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block page_title %}
 Match
 {% endblock page_title %}
@@ -8,6 +10,83 @@ Match
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+
 {% block content %}
+    <div class="">
+
     Match page
+
+    <table class="match">
+        <tr>
+            <th colspan="3">{{ match.date | date }}</th>
+        </tr>
+        <tr>
+            <td>Home Team</td>
+            <td>Result</td>
+            <td>Away Team</td>
+        </tr>
+        <tr>
+            <td>{{ match.home_team.name }}</td>
+            <td>
+                <div>
+                {{ match.home_score|default_if_none:"-" }} : {{ match.away_score|default_if_none:"-" }}
+                </div>
+            </td>
+            <td>{{ match.away_team.name }}</td>
+        </tr>
+        <tr>
+            <th colspan="3">Your prediction</th>
+        </tr>
+        <tr>
+            <td>{{ match.home_team.name }}</td>
+            <td>
+                <form id="prediction" action="{% url 'predict' match_id=match.match_id %}" method="post">
+                    {% csrf_token %}
+                    <input form="prediction" class="pred_input" type="text" name="home_score" pattern="\d*"  
+                        {% if not user.is_authenticated %} disabled {% endif %}
+                        {% if match_prediction.home_score_prediction is not null %} value="{{ match_prediction.home_score_prediction }}" {% endif %}
+                        > 
+                        : 
+                    <input form="prediction" class="pred_input" type="text" name="away_score" pattern="\d*" 
+                        {% if not user.is_authenticated %} disabled {% endif %}
+                        {% if match_prediction.away_score_prediction is not null %} value="{{ match_prediction.away_score_prediction }}" {% endif %}
+                        >
+                </form>
+            </td>
+            <td>{{ match.away_team.name }}</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input form="prediction" class="pred_submit" type="submit" value="Submit prediction" {% if not user.is_authenticated %} disabled {% endif %} >
+            </td>
+        </tr>
+    </table>
+
+
+    </div>
+    
+    <div class="comments">
+        Comments
+
+        {% for c in comments %}
+        <div>
+            <span class="author">{{ c.author }} | </span>
+            <span class="date">{{ c.date }}</span>
+            <!-- <br> -->
+            <p>{{ c.text }}</p>
+        </div>
+        {% endfor %}
+            
+        <div>
+            <form name="comment" action="{% url 'comment_match' match_id=match.match_id %}" method="post">
+                {% csrf_token %}
+                <div><textarea class="comment_textarea" name="text" rows="5">What the game!</textarea></div>
+                <div><input type="submit" value="Add comment"
+                    {% if not user.is_authenticated %} disabled {% endif %}></div>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

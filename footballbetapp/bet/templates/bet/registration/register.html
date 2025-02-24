@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Profile
+{% endblock page_title %}
+
+{% block navigation %}
+    {% include "bet/includes/header.html" %}
+{% endblock navigation %}
+
+{% block content %}
+    Register User Page
+
+    <form method="post">
+        {% csrf_token %}
+        <!-- {{ form }} -->
+        <div>
+            <label for="uname">{{ form.username.label }}</label>
+            <input id="uname" type="text" name="username">
+            <!-- {{ form.username }} -->
+        </div>
+        
+        <div>
+            <label for="email">{{ form.email.label }}</label>
+            <input id="email" type="email" name="email">
+            <!-- {{ form.email }} -->
+        </div>
+        
+        <div>
+            <label for="fname">{{ form.first_name.label }}</label>
+            <input id="fname" type="text" name="first_name">
+            <!-- {{ form.first_name }} -->
+        </div>
+
+        <div>
+            <label for="lname">{{ form.last_name.label }}</label>
+            <input id="lname" type="text" name="last_name">
+            <!-- {{ form.last_name }} -->
+        </div>
+        
+        <div>
+            <label for="pass1">{{ form.password1.label }}</label>
+            <input id="pass1" type="password" name="password1">
+            <!-- {{ form.password1 }} -->
+        </div>
+
+        <div>
+            <label for="pass2">{{ form.password2.label }}</label>
+            <input id="pass2" type="password" name="password2">
+            <!-- {{ form.password2 }} -->
+            <ol>
+                {% for error in form.password2.errors %}
+                <li>
+                    {{ error }}
+                </li>
+                {% endfor %}
+            </ol>
+            
+            <!-- {{ form.password2.errors }} -->
+        </div>
+    
+        <button type="submit">Sing Up</button>
+    </form>
+
+
+{% endblock content %}

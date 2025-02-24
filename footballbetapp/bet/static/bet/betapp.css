@@ -1,0 +1,154 @@
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
+    /* background-color: yellowgreen; */
+}
+
+table a{
+    color: rgba(0, 0, 0, 0.945);
+    text-decoration: none;
+    display: block;
+
+}
+
+th, tr{
+    height: 2rem;
+    font-size: large;
+}
+
+th {
+    background-color: rgb(54, 54, 54);
+    color: white;
+}
+
+tr:nth-child(even){
+    background-color: rgb(151, 151, 151);
+}
+
+tr:nth-child(odd){
+    background-color: rgb(206, 206, 206);
+}
+
+.form-div{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.standigs-form, .matches-form{
+    margin: 0px;
+    border-color: brown;
+    border-radius: 1rem;
+}
+
+.select-div{
+    height: 2.5rem;
+    display: inline-flex;
+}
+
+ .form-div select, .form-div input, .form-div label 
+ /* select, input, label, textarea */
+ {
+    text-align: center;
+    font-size: large;
+    width: 10rem;
+}
+
+.form-div select:hover, .form-div input:enabled:hover{
+    text-align: center;
+    font-size: large;
+    background-color: brown;
+    color: white;
+    width: 10rem;   
+}
+
+.label-div{
+    /* width: 10rem; */
+    display: inline-flex;
+} 
+
+.option-div{
+    background-color: aqua;
+    width: 15rem;
+    height: 20rem;
+    overflow: scroll;
+}
+
+.points {
+    font-weight: bold;
+    /* color: blueviolet; */
+}
+
+.match td:nth-child(odd) {
+    width: 40%;
+    font-size: large;
+}
+
+.pred_input::-webkit-inner-spin-button,
+.pred_input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.pred_input {
+    width: 3rem;
+}
+
+.pred_input:hover {
+    all: none;
+}
+
+.pred_submit {
+    width: 100%;
+}
+
+.comments{
+    width: 80%;
+    margin: 10rem auto 0 auto;
+    display: grid;
+}
+
+.comments div {
+    padding: 0.5rem 0 0.5rem 0;
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.contact input, .contact textarea {
+    text-align: left;
+}
+
+.contact_short {
+    border-radius: 10px;
+    padding: 0.4rem;
+    display: flex;
+    width: 26rem;
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(77, 74, 71);
+}
+
+.contact input, .contact textarea {
+    margin-bottom: 1.2rem;
+}
+
+.comment_textarea, .contacttext {
+    border-radius: 10px;
+    padding: 0.4rem;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    border: solid;
+    border-width: 2px;
+    border-color: rgb(77, 74, 71);
+}
+
+span.date, span.author {
+    font-size: small;
+}

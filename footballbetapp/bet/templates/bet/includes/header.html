@@ -1,8 +1,8 @@
 {% load static %}
 
-{% block css_files %}
+<!-- {% block css_files %} -->
 <link rel="stylesheet" href="{% static "bet/header.css" %}">
-{% endblock css_files %}
+<!-- {% endblock css_files %} -->
 
 <div class="menu">
     <nav>
@@ -12,14 +12,22 @@
         <a href="{% url "matches" %}">Matches</a>
         <a href="{% url "ranking" %}">Ranking</a>
         <a href="{% url "profile" %}">Profile</a>
+        <a href="{% url "contact" %}">Contact</a>
         <a href="{% url "about" %}">About</a>
-        <a id="a-logout" href="{% url "login" %}">Logout</a>
+
+        <form action="{% url "logout" %}" method="post">
+            {% csrf_token %}
+            <a id="a-logout" href="javascript:;" onclick="parentNode.submit()">Logout</a>
+        </form>
+
         {% else %}
         <a href="{% url "home" %}">Home</a>
         <a href="{% url "teams" %}">Teams</a>
         <a href="{% url "matches" %}">Matches</a>
         <a href="{% url "about" %}">About</a>
+        <a href="{% url "contact" %}">Contact</a>
         <a id="a-login" href="{% url "login" %}">Login</a>
         {% endif %}
     </nav>
+
 </div>

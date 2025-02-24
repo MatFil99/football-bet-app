@@ -13,11 +13,45 @@ Login
     <h2>Log In</h2>
     <form method="post">
       {% csrf_token %}
-      {{ form }}
+      
+      <div>
+        <label for="uname">{{ form.username.label }}</label>
+        <input id="uname" type="text" name="username">
+        
+        <ol>
+        {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ol>
+        
+            
+      </div>
+
+      <div>
+        <label for="pass">{{ form.password.label }}</label>
+        <input id="pass" type="password" name="password">
+        <ol>
+            {% for error in form.password.errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ol>
+      </div>
+
+      <ol>
+        
+        {% for error in form.non_field_errors %}
+           <li>{{ error }}</li> 
+        {% endfor %}
+            
+      </ol>
+      
       <button type="submit">Log In</button>
     </form>
 
-
+    <hr>
+    <a href="{% url 'password_reset' %}">Forgot Password</a>
+    <hr>
+    <a href="{% url 'register' %}">Sign Up</a>
     <!-- <form action="">
         <label for="first">
             Username:

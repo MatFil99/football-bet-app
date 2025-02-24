@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_title %}
+Contact
+{% endblock page_title %}
+
+{% block navigation %}
+    {% include "bet/includes/header.html" %}
+{% endblock navigation %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+
+{% block content %}
+
+    <div class="contact">
+        <form id="contact" action="{% url 'contact' %}" method="post">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" name="name" class="contact_short">
+            <label for="email">Email</label>
+            <input type="text" name="email" class="contact_short">
+            <label for="inquiry">Subject</label>
+            <input type="text" name="inquiry" class="contacttext">
+            <label for="message">Message</label>
+            <textarea name="message" class="contacttext" rows="5"></textarea>
+            <input type="submit" name="sendmail" value="Send email">
+        </form>
+    </div>
+    
+{% endblock content %}

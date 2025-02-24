@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block page_title %}
-Profile
+Calculate Predictions' Points
 {% endblock page_title %}
 
 {% block navigation %}
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+
 {% block content %}
-    Profile page
+    
+    Calculate Predictions' Points
+
 {% endblock content %}

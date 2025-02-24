@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block page_title %}
 Ranking
 {% endblock page_title %}
@@ -8,6 +10,27 @@ Ranking
     {% include "bet/includes/header.html" %}
 {% endblock navigation %}
 
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "bet/betapp.css" %}">
+{% endblock css_files %}
+
 {% block content %}
-    Ranking page
+
+    <table id="user_ranking">
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th class="points">Points</th>
+        </tr>
+        {% for user_result in ranking %}
+        <!-- <li>{{ team.name }} {{ team.football_team_id }}</li> -->
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ user_result.username }}</td>
+            <td class="points">{{ user_result.points|default_if_none:"0" }}</td>
+        </tr>
+        {% empty %}
+            <p>No Football Teams</p>
+        {% endfor %}
+    </table>
 {% endblock content %}

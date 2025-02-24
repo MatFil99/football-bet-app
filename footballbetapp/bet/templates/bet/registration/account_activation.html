@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block page_title %}
+Acoount activation
+{% endblock page_title %}
+
+{% block navigation %}
+    {% include "bet/includes/header.html" %}
+{% endblock navigation %}
+
+{% block content %}
+
+
+{% if activation_success == True %}
+    Account activated successfully.
+{% else %}
+    Invalid activation code
+{% endif %}
+
+
+{% endblock content %}
